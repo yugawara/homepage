@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-mkdir -p $SCRIPT_DIR/output
-echo a > $SCRIPT_DIR/output/index.html
+python3 -m venv ve
+source ve/bin/activate
+python -m pip install "pelican[markdown]"
+pushd retrosynth
+pelican -s pelicanconf.py -o output content
+#pelican -s pelicanconf.py -o output -t theme content
